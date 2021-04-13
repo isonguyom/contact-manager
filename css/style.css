@@ -1,0 +1,159 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-size: 100%;
+}
+
+
+body {
+  font-family: 'Courier New', Courier, monospace;
+  padding: 1em 0;
+}
+
+h1 {
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+fieldset {
+  width: 100%;
+  padding: 2.5em 1em;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 30px;
+  text-align: center;
+  background: radial-gradient(purple, rgb(53, 2, 53));
+  color: white;
+  border: none;
+}
+
+.input-container {
+  width: 100%;
+  background: none;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+legend {
+  padding-top: 2em;
+  font-size: 1.5rem;
+}
+
+input {
+  width: 100%;
+  padding: 1em;
+  margin-bottom: 15px;
+  border: 0;
+  border-radius: 15px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+input::placeholder {color: purple;}
+input:hover {background-color: rgb(87, 2, 87);}
+
+input:focus {
+  outline: none;
+  background-color: purple;
+  color: white;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 20px;
+  color: white;
+  background-color: purple;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+button:hover {
+ opacity: 0.8;
+}
+
+button:focus {outline: none;}
+
+.list {
+  width: 100%;
+  text-align: center;
+  padding: 1em;
+}
+
+.table-caption {
+  margin-top: 5rem;
+}
+
+.table-container {
+  overflow: auto;
+  padding: 1em;
+}
+
+table {
+    margin-top: 10px;
+    border-collapse: collapse;
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+th, tr, td {
+    border: 2px solid purple;
+    padding: 1rem;
+}
+ 
+
+#contact {
+  width: 80%;
+  margin: auto;
+  overflow: auto;
+  text-align: center;
+}
+
+
+@media all and (min-width: 600px) {
+  input {
+    width: 45%;
+  }
+
+  button {
+    width: 50%;
+  }
+
+  .table-button {
+    width: 20%;
+  }
+}
+
+@media all and (min-width: 1000px) {
+  fieldset {
+    width: 90%;
+  }
+  
+  input {
+    width: 23%;
+  }
+
+  button {
+    width: 25%;
+  }
+
+  .table-button {
+    width: 10%;
+  }
+}
