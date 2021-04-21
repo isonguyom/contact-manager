@@ -10,7 +10,7 @@
 
 <body>
     <h1>Contact Manager</h1>
-    <form onsubmit="return formSubmitted();">
+    <form onsubmit="return submitForm();">
         <fieldset>
             <legend>Personal Informations</legend>
             <div class="input-container">
@@ -19,7 +19,7 @@
                 <input type="tel" id="tel" placeholder="Phone Number" required>
                 <input type="text" id="state" placeholder="State/region" required>
             </div>
-            <button id="addContact" type="button" onclick="formSubmitted()">Add Contact</button>
+            <button id="addContact" type="button">Add Contact</button>
         </fieldset>
     </form>
     <section class="list">
@@ -27,7 +27,8 @@
         <div class="table-container">
             <div id="contacts"></div>
         </div>
-        <p><button type="button" class="table-button" onclick="emptyList();">Empty</button>
+        <p>
+        <button type="button" class="table-button" onclick="emptyList();">Empty</button>
             <button type="button" class="table-button" onclick="cm.save();">Save</button>
             <button type="button" class="table-button" onclick="loadList();">Load</button>
         </p>

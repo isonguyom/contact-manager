@@ -189,6 +189,32 @@ let submitForm = function () {
 		email: email.value,
 		tel: tel.value,
 		state: state.value
-	}
+	};
+	console.log(newContact);
+
+	contactTable(newContact);
+	//add contact to contact table
+	// newContact.addToTable()
+	//refresh table
 };
 addContactBtn.addEventListener("click", submitForm);
+
+let contactTable = function (contact) {
+	let tableContainer = document.getElementById('contacts')
+	if (tableContainer.innerHTML == "") {
+		tableContainer.innerHTML = "<p>No contacts to display!</p>";
+	}
+	//create table
+	let table = document.createElement("table");
+	//create title row
+	let title = table.insertRow();
+	title.innerHTML = "<th>Name</th>" + "<th>Email</th>" + "<th>Tel</th>" + "<th>State</th>";
+
+	//create row
+	var row = table.insertRow();
+	row.innerHTML = "<td>" + contact.name + "</td>" +
+		"<td>" + contact.email + "</td>" + "<td>" + contact.tel + "</td>" +
+		"<td>" + contact.state + "</td>";
+	// adds the table to the div
+	tableContainer.appendChild(table);
+}
