@@ -174,47 +174,201 @@
 // }
 
 //Global declarations
-let addContactBtn = document.getElementById("addContact");
-let cm;
+// let addContactBtn = document.getElementById("addContact");
+// let cm;
+// let tableContainer = document.getElementById("contacts")
 
-let submitForm = function () {
-	//Get new contact input values
-	let name = document.getElementById("name");
-	let email = document.getElementById("email");
+// let submitForm = function () {
+// 	//Get new contact input values
+// 	let name = document.getElementById("name");
+// 	let email = document.getElementById("email");
+// 	let tel = document.getElementById("tel");
+// 	let state = document.getElementById("state");
+// 	//create an object of the new contact
+// 	let newContact = {
+// 		name: name.value,
+// 		email: email.value,
+// 		tel: tel.value,
+// 		state: state.value
+// 	};
+// 	console.log(newContact);
+// 	contactTable(newContact);
+
+// 	// contactTable(newContact);
+// 	//add contact to contact table
+// 	// newContact.addToTable()
+// 	//refresh table
+// };
+// addContactBtn.addEventListener("click", submitForm);
+
+
+
+// let ontactTable = function (contact) {
+// 	//empty table
+// 	tableContainer.innerHTML = "";
+// 	this.contact = [];
+// 	if(this.contact.length === 0) {
+// 		tableContainer.innerHTML = "<p>No contacts to display!</p>";
+// 		//stop executing this function
+// 		return
+// 	}
+// 	//create table
+// 	let table = document.createElement("table");
+// 	//create title row
+// 	let title = table.insertRow();
+// 	title.innerHTML = "<th>Name</th>" + "<th>Email</th>" + "<th>Tel</th>" + "<th>State</th>";
+
+
+// 	tableContainer.appendChild(table);
+// }
+
+
+let cm;
+let init = function () {
+	cm = new ContactManager();
+
+	cm.addTestData();
+	cm.printContactsToConsole();
+
+	// Display contacts in a table
+	// Pass the id of the HTML element that will contain the table
+	cm.contactsTable("contacts");
+}
+window.onload = init;
+
+function submitForm() {
+	// Get the values from input fields
+	let name = document.querySelector("#name");
+	let email = document.querySelector("#email");
 	let tel = document.getElementById("tel");
 	let state = document.getElementById("state");
-	//create an object of the new contact
-	let newContact = {
-		name: name.value,
-		email: email.value,
-		tel: tel.value,
-		state: state.value
-	};
-	console.log(newContact);
+	let newContact = new Contact(name.value, email.value);
+	cm.add(newContact);
 
-	contactTable(newContact);
-	//add contact to contact table
-	// newContact.addToTable()
-	//refresh table
-};
-addContactBtn.addEventListener("click", submitForm);
+	// Empty the input fields
+	name.value = "";
+	email.value = "";
+	tel.value = "";
+	state.value = "";
 
-let contactTable = function (contact) {
-	let tableContainer = document.getElementById('contacts')
-	if (tableContainer.innerHTML == "") {
-		tableContainer.innerHTML = "<p>No contacts to display!</p>";
-	}
-	//create table
-	let table = document.createElement("table");
-	//create title row
-	let title = table.insertRow();
-	title.innerHTML = "<th>Name</th>" + "<th>Email</th>" + "<th>Tel</th>" + "<th>State</th>";
+	// refresh the html table
+	cm.contactsTable("contacts");
 
-	//create row
-	var row = table.insertRow();
-	row.innerHTML = "<td>" + contact.name + "</td>" +
-		"<td>" + contact.email + "</td>" + "<td>" + contact.tel + "</td>" +
-		"<td>" + contact.state + "</td>";
-	// adds the table to the div
-	tableContainer.appendChild(table);
+	// do not let your browser submit the form using HTTP
+	return false;
 }
+
+class Contact {
+	constructor(name, email) {
+		this.name = name;
+		this.email = email;
+		this.tel = tel;
+		this.state = state;
+	}
+}
+
+class ContactManager {
+	constructor() {
+		// the contact manager initial has an empty list of contacts
+		this.contactsList = [];
+	}
+
+	//add new contact to contact manager
+	add(contact) {
+		this.contactsList.push(contact);
+	}
+
+	//save contact to local storage
+	save() {
+		// We can only save strings in local storage. So, let's convert
+		// our array of contacts to JSON
+		localStorage.contacts = JSON.stringify(this.contactsList);
+	}
+	//load conta
+	load() {
+		if (localStorage.contacts !== undefined) {
+			// the array of contacts is saved in JSON, let's convert
+			// it back to a reak JavaScript object.
+			this.contactsList = JSON.parse(localStorage.contacts);
+		}
+	}
+	//sort contacts by name
+	sort() {
+		this.contactsList.sort(ContactManager.compareName);
+	}
+
+	// class method for comparing two contacts by name
+	static compareName(c1, c2) {
+		if (c1.name < c2.name)
+			return -1;
+
+		if (c1.name > c2.name)
+			return 1;
+
+		return 0;
+	}
+
+	addTestData() {
+		let c1 = new Contact("Jimi Hendrix", "jimi@rip.com");
+		let c2 = new Contact("Robert Fripp", "robert.fripp@kingcrimson.com");
+		let c3 = new Contact("Angus Young", "angus@acdc.com");
+		let c4 = new Contact("Arnold Schwarzenneger", "T2@terminator.com");
+
+		this.add(c1);
+		this.add(c2);
+		this.add(c3);
+		this.add(c4);
+
+		// Let's sort the list of contacts by Name
+		this.sort();
+	}
+
+	// let idOfContainer = document.getElementById("contacts");
+
+	contactsTable(tableContainer) {
+		// the table is initially empty
+		let container = document.querySelector("#" + tableContainer);
+		container.innerHTML = "";
+
+		if (this.contactsList.length === 0) {
+			container.innerHTML = "<p>No contacts to display!</p>";
+			// stops the execution of this method
+			return;
+		}
+		// creates and populates the table with users
+		let table = document.createElement("table");
+		// iterates on the array of users
+		this.contactsList.forEach(function (currentContact) {
+			// creates a row
+			let row = table.insertRow();
+			row.innerHTML = "<td>" + currentContact.name + "</td>" +
+				"<td>" + currentContact.email + "</td>" + "<td>" + currentContact.tel + "</td>" +
+				"<td>" + currentContact.state + "</td>"
+		});
+
+		// adds the table to the div
+		container.appendChild(table);
+	}
+	printContactsToConsole() {
+		this.contactsList.forEach(function (c) {
+			console.log(c.name);
+		});
+	}
+
+}
+
+// addContactBtn.addEventListener("click", submitForm);
+
+// var cm = new ContactManager();
+// var c1 = new Contact("Jimi Hendrix", "jimi@rip.com");
+// var c2 = new Contact("Robert Fripp", "robert.fripp@kingcrimson.com");
+// var c3 = new Contact("Angus Young", "angus@acdc.com");
+// var c4 = new Contact("Arnold Schwarzenneger", "T2@terminator.com");
+
+// console.log("--- Adding 4 contacts ---")
+// cm.add(c1);
+// cm.add(c2);
+// cm.add(c3);
+// cm.add(c4);
+
+// cm.printContactsToConsole();
