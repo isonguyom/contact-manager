@@ -224,6 +224,7 @@
 
 
 let cm;
+let addContactBtn = document.getElementById("addContact");
 let init = function () {
 	cm = new ContactManager();
 
@@ -242,7 +243,7 @@ function submitForm() {
 	let email = document.querySelector("#email");
 	let tel = document.getElementById("tel");
 	let state = document.getElementById("state");
-	let newContact = new Contact(name.value, email.value);
+	let newContact = new Contact(name.value, email.value, tel.value, state.value);
 	cm.add(newContact);
 
 	// Empty the input fields
@@ -258,8 +259,18 @@ function submitForm() {
 	return false;
 }
 
+let emptyList = function() {
+	cm.empty();
+	cm.contactsTable("contacts");
+}
+
+let loadList = function() {
+	cm.load();
+	cm.contactsTable("contacts");
+}
+
 class Contact {
-	constructor(name, email) {
+	constructor(name, email, tel, state) {
 		this.name = name;
 		this.email = email;
 		this.tel = tel;
@@ -309,10 +320,10 @@ class ContactManager {
 	}
 
 	addTestData() {
-		let c1 = new Contact("Jimi Hendrix", "jimi@rip.com");
-		let c2 = new Contact("Robert Fripp", "robert.fripp@kingcrimson.com");
-		let c3 = new Contact("Angus Young", "angus@acdc.com");
-		let c4 = new Contact("Arnold Schwarzenneger", "T2@terminator.com");
+		let c1 = new Contact("Jimi Hendrix", "jimi@rip.com", "00000000", "aks");
+		let c2 = new Contact("Robert Fripp", "robert.fripp@kingcrimson.com", "00000000", "aks");
+		let c3 = new Contact("Angus Young", "angus@acdc.com", "00000000", "aks");
+		let c4 = new Contact("Arnold Schwarzenneger", "T2@terminator.com", "00000000", "aks");
 
 		this.add(c1);
 		this.add(c2);
@@ -341,9 +352,9 @@ class ContactManager {
 		this.contactsList.forEach(function (currentContact) {
 			// creates a row
 			let row = table.insertRow();
-			row.innerHTML = "<td>" + currentContact.name + "</td>" +
+			row.innerHTML = "check" + "<td>" + currentContact.name + "</td>" +
 				"<td>" + currentContact.email + "</td>" + "<td>" + currentContact.tel + "</td>" +
-				"<td>" + currentContact.state + "</td>"
+				"<td>" + currentContact.state + "</td>" + "delete"
 		});
 
 		// adds the table to the div
@@ -357,7 +368,9 @@ class ContactManager {
 
 }
 
-// addContactBtn.addEventListener("click", submitForm);
+
+
+addContactBtn.addEventListener("click", submitForm);
 
 // var cm = new ContactManager();
 // var c1 = new Contact("Jimi Hendrix", "jimi@rip.com");
