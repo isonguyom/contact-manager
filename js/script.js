@@ -1,4 +1,3 @@
-
 let cm;
 let init = function () {
 	cm = new ContactManager();
@@ -90,20 +89,20 @@ class ContactManager {
 		return 0;
 	}
 
-	addTestData() {
-		let c1 = new Contact("Jimi Hendrix", "jimi@rip.com", "00000000", "aks");
-		let c2 = new Contact("Robert Fripp", "robert.fripp@kingcrimson.com", "00000000", "aks");
-		let c3 = new Contact("Angus Young", "angus@acdc.com", "00000000", "aks");
-		let c4 = new Contact("Arnold Schwarzenneger", "T2@terminator.com", "00000000", "aks");
+	// addTestData() {
+	// 	let c1 = new Contact("Jimi Hendrix", "jimi@rip.com", "00000000", "aks");
+	// 	let c2 = new Contact("Robert Fripp", "robert.fripp@kingcrimson.com", "00000000", "aks");
+	// 	let c3 = new Contact("Angus Young", "angus@acdc.com", "00000000", "aks");
+	// 	let c4 = new Contact("Arnold Schwarzenneger", "T2@terminator.com", "00000000", "aks");
 
-		this.add(c1);
-		this.add(c2);
-		this.add(c3);
-		this.add(c4);
+	// 	this.add(c1);
+	// 	this.add(c2);
+	// 	this.add(c3);
+	// 	this.add(c4);
 
-		// Let's sort the list of contacts by Name
-		this.sort();
-	}
+	// 	// Let's sort the list of contacts by Name
+	// 	this.sort();
+	// }
 
 	// let idOfContainer = document.getElementById("contacts");
 
