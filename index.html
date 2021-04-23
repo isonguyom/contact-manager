@@ -17,17 +17,20 @@
                 <input type="text" id="name" placeholder="Name" required>
                 <input type="email" id="email" placeholder="Email" required>
                 <input type="tel" id="tel" placeholder="Phone Number" required>
-                <input type="text" id="state" placehold                                                                                                                                                                                                                                                        tact</button>
+                <input type="text" id="state" placeholder="state" required>
+            </div>
+            <button id="addContact">Add contact</button>
         </fieldset>
     </form>
     <section class="list">
         <h2 class="table-caption">List Of Contacts</h2>
         <div class="table-container">
+            <div id="contacts"></div>
         </div>
         <p>
-            <button type="button" class="table-button" onclick="emptyList();">Empty</button>
-            <button type="button" class="table-button" onclick="cm.save();">Save</button>
-            <button type="button" class="table-button" onclick="loadList();">Load</button>
+            <button type="button" id="empty" class="table-button">Empty</button>
+            <button type="button" id="save" class="table-button">Save</button>
+            <button type="button" id="load" class="table-button">Load</button>
         </p>
     </section>
 
