@@ -122,9 +122,16 @@ class ContactManager {
 		this.contactsList.forEach(function (currentContact) {
 			// creates a row
 			let row = table.insertRow();
-			row.innerHTML = "check" + "<td>" + currentContact.name + "</td>" +
+			let mark = document.createElement("input");
+			mark.type = "checkbox";
+			let delContact = document.createElement('img');
+			delContact.src = "delete-icon.png";
+			delContact.style.width = "70%";
+			row.innerHTML = "<td>" + currentContact.name + "</td>" +
 				"<td>" + currentContact.email + "</td>" + "<td>" + currentContact.tel + "</td>" +
-				"<td>" + currentContact.state + "</td>" + "delete"
+				"<td>" + currentContact.state + "</td>";
+			row.appendChild(delContact);
+			// row.insertBefore(mark, row.childNodes[0]);
 		});
 
 		// adds the table to the div
@@ -138,12 +145,12 @@ class ContactManager {
 
 }
 
-let emptyList = function() {
+let emptyList = function () {
 	cm.empty();
 	cm.contactsTable("contacts");
 }
 
-let loadList = function() {
+let loadList = function () {
 	cm.load();
 	cm.contactsTable("contacts");
 }
@@ -157,7 +164,7 @@ let loadBtn = document.getElementById("load");
 
 addContactBtn.addEventListener("click", submitForm);
 emptyBtn.addEventListener("click", emptyList);
-saveBtn.addEventListener("click", function(){
+saveBtn.addEventListener("click", function () {
 	cm.save();
 });
 loadBtn.addEventListener("click", loadList);
