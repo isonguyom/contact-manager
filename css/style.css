@@ -13,7 +13,7 @@ html {
 
 body {
   font-family: 'Courier New', Courier, monospace;
-  padding: 1em 0;
+  padding: 1em 7%;
 }
 
 h1 {
@@ -26,8 +26,7 @@ h1 {
 fieldset {
   width: 100%;
   padding: 2.5em 1em;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   border-radius: 30px;
   text-align: center;
   background: radial-gradient(purple, rgb(53, 2, 53));
@@ -58,8 +57,13 @@ input {
   font-family: 'Courier New', Courier, monospace;
 }
 
-input::placeholder {color: purple;}
-input:hover {background-color: rgb(87, 2, 87);}
+input::placeholder {
+  color: purple;
+}
+
+input:hover {
+  background-color: rgb(87, 2, 87);
+}
 
 input:focus {
   outline: none;
@@ -83,47 +87,74 @@ button {
 }
 
 button:hover {
- opacity: 0.8;
+  opacity: 0.8;
 }
 
-button:focus {outline: none;}
+button:focus {
+  outline: none;
+}
 
 .list {
   width: 100%;
-  text-align: center;
   padding: 1em;
-}
-
-.table-caption {
-  margin-top: 5rem;
+  margin-top: 4em;
 }
 
 .table-container {
   overflow: auto;
-  padding: 1em;
+  width: fit-content;
+  margin: 0 auto;
 }
+
+.caption {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-caption {
+  margin-right: 2em;
+}
+
+menu ul {
+  list-style: none;
+  display: inline;
+}
+
+menu ul li {
+  display: inline-block;
+}
+
 
 table {
-    margin-top: 10px;
-    border-collapse: collapse;
-    overflow: auto;
-    margin-left: auto;
-    margin-right: auto;
+  border-collapse: collapse;
+  overflow: auto;
+  clear: both;
+  margin: 10px auto 0;
 }
 
 
-th, tr, td {
-    border: 2px solid purple;
-    padding: 1rem;
+th,
+tr,
+td {
+  border: 2px solid purple;
+  padding: 1rem;
 }
- 
+
 
 #contact {
   width: 80%;
   margin: auto;
   overflow: auto;
   text-align: center;
+  clear: both;
 }
+
+/* #del {
+  width: 70%;
+  display: block;
+} */
 
 
 @media all and (min-width: 600px) {
@@ -134,26 +165,18 @@ th, tr, td {
   button {
     width: 50%;
   }
-
-  .table-button {
-    width: 20%;
-  }
 }
 
 @media all and (min-width: 1000px) {
   fieldset {
     width: 90%;
   }
-  
+
   input {
     width: 23%;
   }
 
   button {
     width: 25%;
-  }
-
-  .table-button {
-    width: 10%;
   }
 }

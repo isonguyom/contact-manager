@@ -3,10 +3,11 @@ let init = function () {
 	cm = new ContactManager();
 
 	cm.addTestData();
+
+	//print to browser console
 	cm.printContactsToConsole();
 
 	// Display contacts in a table
-	// Pass the id of the HTML element that will contain the table
 	cm.contactsTable("contacts");
 }
 window.onload = init;
@@ -44,7 +45,7 @@ class Contact {
 
 class ContactManager {
 	constructor() {
-		// the contact manager initial has an empty list of contacts
+		// the contact manager initially has an empty list of contacts
 		this.contactsList = [];
 	}
 
@@ -65,6 +66,11 @@ class ContactManager {
 		this.contactsList = [];
 	}
 
+	//delete individual row
+	delRow() {
+		this.contactsList.row = [];
+	}
+
 	//load contact manager
 	load() {
 		if (localStorage.contacts !== undefined) {
@@ -73,6 +79,7 @@ class ContactManager {
 			this.contactsList = JSON.parse(localStorage.contacts);
 		}
 	}
+
 	//sort contacts by name
 	sort() {
 		this.contactsList.sort(ContactManager.compareName);
@@ -118,21 +125,24 @@ class ContactManager {
 		}
 		// creates and populates the table with users
 		let table = document.createElement("table");
-		// iterates on the array of users
-		this.contactsList.forEach(function (currentContact) {
-			// creates a row
-			let row = table.insertRow();
-			let mark = document.createElement("input");
-			mark.type = "checkbox";
-			let delContact = document.createElement('img');
-			delContact.src = "delete-icon.png";
-			delContact.style.width = "70%";
-			row.innerHTML = "<td>" + currentContact.name + "</td>" +
-				"<td>" + currentContact.email + "</td>" + "<td>" + currentContact.tel + "</td>" +
-				"<td>" + currentContact.state + "</td>";
-			row.appendChild(delContact);
-			// row.insertBefore(mark, row.childNodes[0]);
-		});
+
+		//create table header
+		let title = table.insertRow();
+		title.innerHTML = "<th>Name</th>" + "<th>Email</th>" + "<th>Tel</th>" + "<th>State</th>",
+
+			// iterates on the array of users
+			this.contactsList.forEach(function (currentContact) {
+				// creates a row
+				let row = table.insertRow();
+				let delContact = document.createElement('img');
+				delContact.src = "delete-icon.png";
+				delContact.id = "del";
+				// delContact.dataset.container = 3;
+				row.innerHTML = "<td>" + currentContact.name + "</td>" +
+					"<td>" + currentContact.email + "</td>" + "<td>" + currentContact.tel + "</td>" +
+					"<td>" + currentContact.state + "</td>";
+				row.appendChild(delContact);
+			});
 
 		// adds the table to the div
 		container.appendChild(table);
