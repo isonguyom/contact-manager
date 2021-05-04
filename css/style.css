@@ -126,6 +126,14 @@ menu ul li {
   display: inline-block;
 }
 
+menu ul li  a{
+  font-size: 1.3rem;
+}
+
+menu ul li  a:hover {
+  font-weight: bold;
+}
+
 
 table {
   border-collapse: collapse;
@@ -139,7 +147,14 @@ th,
 tr,
 td {
   border: 2px solid purple;
-  padding: 1rem;
+  padding: 1em;
+  font-size: 1.1rem;
+}
+
+th {
+  background-color: purple;
+  border: 2px solid gray;
+  color: white;
 }
 
 
@@ -151,10 +166,21 @@ td {
   clear: both;
 }
 
-/* #del {
-  width: 70%;
-  display: block;
-} */
+#searchTable {
+min-width: 200px;
+border: 1px solid gray;
+padding: 0.5em;
+}
+
+#searchTable:hover {
+  background-color: rgb(214, 212, 212);
+}
+
+#searchTable:focus {
+  outline: none;
+  background-color:rgb(233, 233, 233);
+  color: purple;
+}
 
 
 @media all and (min-width: 600px) {

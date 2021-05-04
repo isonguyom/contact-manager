@@ -66,11 +66,6 @@ class ContactManager {
 		this.contactsList = [];
 	}
 
-	//delete individual row
-	delRow() {
-		this.contactsList.row = [];
-	}
-
 	//load contact manager
 	load() {
 		if (localStorage.contacts !== undefined) {
@@ -96,22 +91,20 @@ class ContactManager {
 		return 0;
 	}
 
-	// addTestData() {
-	// 	let c1 = new Contact("Jimi Hendrix", "jimi@rip.com", "00000000", "aks");
-	// 	let c2 = new Contact("Robert Fripp", "robert.fripp@kingcrimson.com", "00000000", "aks");
-	// 	let c3 = new Contact("Angus Young", "angus@acdc.com", "00000000", "aks");
-	// 	let c4 = new Contact("Arnold Schwarzenneger", "T2@terminator.com", "00000000", "aks");
+	addTestData() {
+		let c1 = new Contact("Jimi Hendrix", "jimi@rip.com", "00000000", "aks");
+		let c2 = new Contact("Robert Fripp", "robert.fripp@kingcrimson.com", "00000000", "aks");
+		let c3 = new Contact("Angus Young", "angus@acdc.com", "00000000", "aks");
+		let c4 = new Contact("Arnold Schwarzenneger", "T2@terminator.com", "00000000", "aks");
 
-	// 	this.add(c1);
-	// 	this.add(c2);
-	// 	this.add(c3);
-	// 	this.add(c4);
+		this.add(c1);
+		this.add(c2);
+		this.add(c3);
+		this.add(c4);
 
-	// 	// Let's sort the list of contacts by Name
-	// 	this.sort();
-	// }
-
-	// let idOfContainer = document.getElementById("contacts");
+		// Let's sort the list of contacts by Name
+		// this.sort();
+	}
 
 	contactsTable(tableContainer) {
 		// the table is initially empty
@@ -125,24 +118,27 @@ class ContactManager {
 		}
 		// creates and populates the table with users
 		let table = document.createElement("table");
+		table.id = "contactTable"
 
 		//create table header
 		let title = table.insertRow();
-		title.innerHTML = "<th>Name</th>" + "<th>Email</th>" + "<th>Tel</th>" + "<th>State</th>",
+		title.innerHTML = "<th>Name</th>" + "<th>Email</th>" + "<th>Tel</th>" + "<th>State</th>";
+		title.style.cursor = "pointer";
 
-			// iterates on the array of users
-			this.contactsList.forEach(function (currentContact) {
-				// creates a row
-				let row = table.insertRow();
-				let delContact = document.createElement('img');
-				delContact.src = "delete-icon.png";
-				delContact.id = "del";
-				// delContact.dataset.container = 3;
-				row.innerHTML = "<td>" + currentContact.name + "</td>" +
-					"<td>" + currentContact.email + "</td>" + "<td>" + currentContact.tel + "</td>" +
-					"<td>" + currentContact.state + "</td>";
-				row.appendChild(delContact);
-			});
+		// iterates on the array of users
+		this.contactsList.forEach(function (currentContact) {
+			// creates a row
+			let row = table.insertRow();
+			// let delContact = document.createElement('img');
+			// delContact.src = "delete-icon.png";
+			// delContact.className = "del-row";
+			// delContact.style.cursor = "pointer";
+			// delContact.dataset.container = 1;
+			row.innerHTML = "<td>" + currentContact.name + "</td>" +
+				"<td>" + currentContact.email + "</td>" + "<td>" + currentContact.tel + "</td>" +
+				"<td>" + currentContact.state + "</td>";
+			// row.appendChild(delContact);
+		});
 
 		// adds the table to the div
 		container.appendChild(table);
@@ -165,11 +161,31 @@ let loadList = function () {
 	cm.contactsTable("contacts");
 }
 
+let searchTable = function () {
+	let search, sort, table, tr, td, i, searchValue;
+	search = document.getElementById("searchTable");
+	sort = search.value.toUpperCase();
+	table = document.getElementById("contactTable");
+	tr = table.getElementsByTagName("tr");
+	for (i = 0; i < tr.length; i++) {
+		td = tr[i].getElementsByTagName("td")[0];
+		if (td) {
+			searchValue = td.textContent || td.innerText;
+			if (searchValue.toUpperCase().indexOf(sort) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+}
+
 let addContactBtn = document.getElementById("addContact");
 let emptyBtn = document.getElementById("empty");
 let saveBtn = document.getElementById("save");
 let loadBtn = document.getElementById("load");
-
+let delRowBtn = document.querySelectorAll(".del-row")
+let searchInput = document.getElementById("searchTable");
 
 
 addContactBtn.addEventListener("click", submitForm);
@@ -178,3 +194,4 @@ saveBtn.addEventListener("click", function () {
 	cm.save();
 });
 loadBtn.addEventListener("click", loadList);
+searchInput.onkeyup = searchTable;
