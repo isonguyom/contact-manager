@@ -76,26 +76,72 @@ class ContactManager {
 	}
 
 	//sort contacts by name
-	sort() {
+	sortByName() {
 		this.contactsList.sort(ContactManager.compareName);
+	}
+	sortByEmail() {
+		this.contactsList.sort(ContactManager.compareEmail);
+	}
+	sortByTel() {
+		this.contactsList.sort(ContactManager.compareTel);
+	}
+	sortByState() {
+		this.contactsList.sort(ContactManager.compareState);
 	}
 
 	// class method for comparing two contacts by name
 	static compareName(c1, c2) {
-		if (c1.name < c2.name)
+		let a = c1.name.toUpperCase();
+		let b = c2.name.toUpperCase();
+		if (a < b)
 			return -1;
 
-		if (c1.name > c2.name)
+		if (a > b)
+			return 1;
+
+		return 0;
+	}
+
+	static compareEmail(c1, c2) {
+		let a = c1.email.toUpperCase();
+		let b = c2.email.toUpperCase();
+		if (a < b)
+			return -1;
+
+		if (a > b)
+			return 1;
+
+		return 0;
+	}
+
+	static compareTel(c1, c2) {
+		let a = c1.tel.toUpperCase();
+		let b = c2.tel.toUpperCase();
+		if (a < b)
+			return -1;
+
+		if (a > b)
+			return 1;
+
+		return 0;
+	}
+	static compareState(c1, c2) {
+		let a = c1.state.toUpperCase();
+		let b = c2.state.toUpperCase();
+		if (a < b)
+			return -1;
+
+		if (a > b)
 			return 1;
 
 		return 0;
 	}
 
 	addTestData() {
-		let c1 = new Contact("Jimi Hendrix", "jimi@rip.com", "00000000", "aks");
-		let c2 = new Contact("Robert Fripp", "robert.fripp@kingcrimson.com", "00000000", "aks");
-		let c3 = new Contact("Angus Young", "angus@acdc.com", "00000000", "aks");
-		let c4 = new Contact("Arnold Schwarzenneger", "T2@terminator.com", "00000000", "aks");
+		let c1 = new Contact("Jimi Hendrix", "jimi@rip.com", "01112000", "aks");
+		let c2 = new Contact("Robert Fripp", "robert.fripp@kingcrimson.com", "0340000", "kd");
+		let c3 = new Contact("angus Young", "angus@acdc.com", "02240000", "Yb");
+		let c4 = new Contact("Arnold Schwarzenneger", "T2@terminator.com", "0934000", "la");
 
 		this.add(c1);
 		this.add(c2);
@@ -124,6 +170,15 @@ class ContactManager {
 		let title = table.insertRow();
 		title.innerHTML = "<th>Name</th>" + "<th>Email</th>" + "<th>Tel</th>" + "<th>State</th>";
 		title.style.cursor = "pointer";
+		let nameCell = title.cells[0];
+		nameCell.onclick = sortListByName;
+		let emailCell = title.cells[1];
+		emailCell.onclick = sortListByEmail;
+		let telCell = title.cells[2];
+		telCell.onclick = sortListByTel;
+		let stateCell = title.cells[3];
+		stateCell.onclick = sortListByState;
+		
 
 		// iterates on the array of users
 		this.contactsList.forEach(function (currentContact) {
@@ -158,6 +213,22 @@ let emptyList = function () {
 
 let loadList = function () {
 	cm.load();
+	cm.contactsTable("contacts");
+}
+let sortListByName = function () {
+	cm.sortByName();
+	cm.contactsTable("contacts");
+}
+let sortListByEmail = function () {
+	cm.sortByEmail();
+	cm.contactsTable("contacts");
+}
+let sortListByTel = function () {
+	cm.sortByTel();
+	cm.contactsTable("contacts");
+}
+let sortListByState = function () {
+	cm.sortByState();
 	cm.contactsTable("contacts");
 }
 
