@@ -75,7 +75,7 @@ class ContactManager {
 		}
 	}
 
-	//sort contacts by name
+	//sorting contacts
 	sortByName() {
 		this.contactsList.sort(ContactManager.compareName);
 	}
@@ -88,8 +88,21 @@ class ContactManager {
 	sortByState() {
 		this.contactsList.sort(ContactManager.compareState);
 	}
+	//Reverse sorting
+	sortByNameRev() {
+		this.contactsList.sort(ContactManager.compareNameRev);
+	}
+	sortByEmailRev() {
+		this.contactsList.sort(ContactManager.compareEmailRev);
+	}
+	sortByTelRev() {
+		this.contactsList.sort(ContactManager.compareTelRev);
+	}
+	sortByStateRev() {
+		this.contactsList.sort(ContactManager.compareStateRev);
+	}
 
-	// class method for comparing two contacts by name
+	// class method for comparing two contacts
 	static compareName(c1, c2) {
 		let a = c1.name.toUpperCase();
 		let b = c2.name.toUpperCase();
@@ -136,6 +149,53 @@ class ContactManager {
 
 		return 0;
 	}
+	// class method for reverse comparism of two contacts
+	static compareNameRev(c1, c2) {
+		let a = c1.name.toUpperCase();
+		let b = c2.name.toUpperCase();
+		if (a < b)
+			return 1;
+
+		if (a > b)
+			return -1;
+
+		return 0;
+	}
+
+	static compareEmailRev(c1, c2) {
+		let a = c1.email.toUpperCase();
+		let b = c2.email.toUpperCase();
+		if (a < b)
+			return 1;
+
+		if (a > b)
+			return -1;
+
+		return 0;
+	}
+
+	static compareTelRev(c1, c2) {
+		let a = c1.tel.toUpperCase();
+		let b = c2.tel.toUpperCase();
+		if (a < b)
+			return 1;
+
+		if (a > b)
+			return -1;
+
+		return 0;
+	}
+	static compareStateRev(c1, c2) {
+		let a = c1.state.toUpperCase();
+		let b = c2.state.toUpperCase();
+		if (a < b)
+			return 1;
+
+		if (a > b)
+			return -1;
+
+		return 0;
+	}
 
 	addTestData() {
 		let c1 = new Contact("Jimi Hendrix", "jimi@rip.com", "01112000", "aks");
@@ -178,7 +238,7 @@ class ContactManager {
 		telCell.onclick = sortListByTel;
 		let stateCell = title.cells[3];
 		stateCell.onclick = sortListByState;
-		
+
 
 		// iterates on the array of users
 		this.contactsList.forEach(function (currentContact) {
@@ -218,6 +278,13 @@ let loadList = function () {
 let sortListByName = function () {
 	cm.sortByName();
 	cm.contactsTable("contacts");
+	// if (cm.sortByName()) {
+	// 	cm.sortByNameRev();
+	// 	cm.contactsTable("contacts");
+	// } else {
+	// 	cm.sortByName();
+	// 	cm.contactsTable("contacts");
+	// }
 }
 let sortListByEmail = function () {
 	cm.sortByEmail();
@@ -249,6 +316,18 @@ let searchTable = function () {
 			}
 		}
 	}
+}
+let editCell = function () {
+	let search, sort, table, tr, td, i, searchValue;
+	table = document.getElementById("contactTable");
+	tr = table.getElementsByTagName("tr");
+	for (i = 0; i < tr.length; i++) {
+		td = tr.getElementsByTagName("td");
+			for (i = 0; i < td.length; i++) {
+				
+			}
+	}
+	
 }
 
 let addContactBtn = document.getElementById("addContact");
