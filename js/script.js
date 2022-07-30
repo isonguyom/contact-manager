@@ -2,7 +2,7 @@ let cm;
 let init = function () {
 	cm = new ContactManager();
 
-	cm.addTestData();
+	// cm.addTestData();
 
 	//print to browser console
 	cm.printContactsToConsole();
@@ -197,20 +197,20 @@ class ContactManager {
 		return 0;
 	}
 
-	addTestData() {
-		let c1 = new Contact("Jimi Hendrix", "jimi@rip.com", "01112000", "aks");
-		let c2 = new Contact("Robert Fripp", "robert.fripp@kingcrimson.com", "0340000", "kd");
-		let c3 = new Contact("angus Young", "angus@acdc.com", "02240000", "Yb");
-		let c4 = new Contact("Arnold Schwarzenneger", "T2@terminator.com", "0934000", "la");
+	// addTestData() {
+	// 	let c1 = new Contact("Jimi Hendrix", "jimi@rip.com", "01112000", "aks");
+	// 	let c2 = new Contact("Robert Fripp", "robert.fripp@kingcrimson.com", "0340000", "kd");
+	// 	let c3 = new Contact("angus Young", "angus@acdc.com", "02240000", "Yb");
+	// 	let c4 = new Contact("Arnold Schwarzenneger", "T2@terminator.com", "0934000", "la");
 
-		this.add(c1);
-		this.add(c2);
-		this.add(c3);
-		this.add(c4);
+	// 	this.add(c1);
+	// 	this.add(c2);
+	// 	this.add(c3);
+	// 	this.add(c4);
 
-		// Let's sort the list of contacts by Name
-		// this.sort();
-	}
+	// 	// Let's sort the list of contacts by Name
+	// 	// this.sort();
+	// }
 
 	contactsTable(tableContainer) {
 		// the table is initially empty
